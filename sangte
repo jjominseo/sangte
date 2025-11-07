@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>지구 리터러시 청소년 펠로우십 — Youth Edition</title>
+<style>
+  :root{
+    --bg:#f4fbff;
+    --card:#ffffff;
+    --accent:#07a3a3; /* 청록 */
+    --accent-2:#3b82f6; /* 파랑 */
+    --muted:#6b7280;
+    --glass: rgba(255,255,255,0.7);
+    --round:14px;
+    --max-w:1100px;
+    font-family: "Noto Sans KR", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background: linear-gradient(180deg,var(--bg), #eaf7f6 60%);
+    color:#0f172a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
+  }
+  .wrap{width:95%;max-width:var(--max-w);margin:24px auto 80px}
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;margin-bottom:18px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
+  }
+  .logo{
+    width:56px;height:56px;border-radius:12px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    box-shadow:0 6px 18px rgba(11,78,117,0.12);
+    color:white;font-weight:700;font-size:18px;
+  }
+  nav{display:flex;gap:12px;align-items:center}
+  .nav-btn{
+    padding:8px 12px;border-radius:10px;background:transparent;border:none;color:var(--muted);cursor:pointer;
+    font-weight:600;
+  }
+  .cta{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+    box-shadow:0 8px 24px rgba(7,163,163,0.15);
+  }
+
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:8px;
+  }
+  .hero-card{
+    background:var(--card);border-radius:18px;padding:28px;box-shadow:0 8px 30px rgba(17,24,39,0.06);
+    backdrop-filter: blur(6px);
+  }
+  .eyebrow{display:inline-block;background:rgba(59,130,246,0.08);color:var(--accent-2);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+  h1{margin:14px 0 8px;font-size:28px;line-height:1.08}
+  p.lead{color:var(--muted);margin:0 0 18px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .pill{
+    display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(7,163,163,0.06),rgba(59,130,246,0.04));font-weight:700;color:var(--accent-2);
+  }
+  .hero-illu{
+    background:linear-gradient(180deg,rgba(59,130,246,0.06),rgba(7,163,163,0.06));
+    border-radius:18px;padding:18px;height:100%;
+    display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;
+  }
+  .illu-card{width:100%;height:220px;border-radius:12px;background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.6), transparent 10%),
+    linear-gradient(135deg,#c9f7f5, #dbeeff);
+    display:grid;place-items:center;position:relative;overflow:hidden;
+  }
+  .illu-tree{position:absolute;left:18px;bottom:12px;opacity:0.95}
+
+  /* Program boxes */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+  .box{background:linear-gradient(180deg,white, #fbfeff);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(11,78,117,0.04)}
+  .box h3{margin:0 0 8px;font-size:15px;color:var(--accent-2)}
+  .box p{margin:0;color:var(--muted);font-size:14px}
+
+  /* Timeline / Steps */
+  .steps{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+  .step{
+    flex:1;min-width:200px;background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(11,78,117,0.03)
+  }
+  .step h4{margin:0 0 6px;color:var(--accent-2)}
+  .step p{margin:0;color:var(--muted);font-size:14px}
+
+  /* Apply form */
+  .apply{
+    margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;
+  }
+  form{
+    min-width:300px;flex:1;background:linear-gradient(180deg,white,#fbfeff);padding:16px;border-radius:12px;
+    box-shadow:0 10px 30px rgba(7,163,163,0.06);
+  }
+  label{display:block;font-weight:700;margin:8px 0 6px;font-size:13px}
+  input[type="text"], input[type="email"], textarea, select{
+    width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef0;background:#fbfff;outline:none;font-size:14px;
+  }
+  textarea{min-height:100px;resize:vertical}
+  .row{display:flex;gap:8px}
+  .small{flex:1;min-width:120px}
+  .btn-row{display:flex;gap:10px;align-items:center;margin-top:12px}
+  .secondary{background:transparent;border:1px solid rgba(7,163,163,0.12);color:var(--accent-2);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+
+  /* Sponsors */
+  .sponsors{margin-top:28px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(59,130,246,0.03),transparent)}
+  .s-logo{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .s-logo .item{width:120px;height:56px;background:white;border-radius:10px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(11,78,117,0.04);font-weight:800;color:var(--muted)}
+
+  /* Stories carousel */
+  .stories{margin-top:22px;display:grid;grid-template-columns:1fr;gap:12px}
+  .story-card{background:linear-gradient(180deg,white,#f8ffff);padding:14px;border-radius:12px;border-left:6px solid var(--accent);box-shadow:0 6px 18px rgba(11,78,117,0.04)}
+  .story-meta{display:flex;gap:12px;align-items:center}
+  .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;color:white;font-weight:800}
+
+  footer{margin-top:36px;padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#f3fcfb);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  footer .small{color:var(--muted);font-size:13px}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;};
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr}
+    .nav-btn{display:none}
+    .brand{gap:8px}
+  }
+
+  /* small interactions */
+  .fade-in{animation:fadeUp .6s cubic-bezier(.2,.9,.2,1) both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .pulse{animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+  .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(59,130,246,0.08);color:var(--accent-2);font-weight:700}
+  .muted{color:var(--muted)}
+  .tiny{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#" aria-label="Earth Literacy Youth">
+        <div class="logo">EL</div>
+        <div>
+          <div style="font-weight:800">지구 리터러시</div>
+          <div style="font-size:12px;color:var(--muted)">청소년 펠로우십 · Youth Edition</div>
+        </div>
+      </a>
+      <nav>
+        <button class="nav-btn">프로그램</button>
+        <button class="nav-btn">참가작</button>
+        <button class="nav-btn">후원</button>
+        <button class="cta" id="applyTopBtn">참가신청</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card fade-in" role="region" aria-labelledby="heroTitle">
+        <div class="eyebrow">청소년 전용 · 3개월 실천</div>
+        <h1 id="heroTitle">지구와 대화하는 청소년, 지구 리터러시 펠로우십</h1>
+        <p class="lead">인문학적 질문으로 환경을 보고, 이야기하고, 행동으로 옮기는 청소년 플랫폼. 학교에서 바로 실행 가능한 프로젝트를 기획하고 실행해봐요.</p>
+        <div class="hero-actions">
+          <span class="pill">🧭 탐구 → ✍️ 표현 → 🌱 실천</span>
+          <span class="pill">📅 12주 코스 · 팀 또는 개인 지원 가능</span>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:10px;align-items:center">
+          <button class="cta" id="scrollApply">지금 신청하기</button>
+          <button class="secondary" id="openGuide">간단 가이드 보기</button>
+        </div>
+
+        <div style="margin-top:18px" class="tiny">
+          <strong>대상:</strong> 중·고등학생 (모든 전공/관심자 환영) · <strong>참가비:</strong> 무료 (선택적 프로젝트비 지원)
+        </div>
+
+        <div class="grid" style="margin-top:18px">
+          <div class="box">
+            <h3>인문적 탐구</h3>
+            <p>환경철학, 지역의 역사, 이야기 만들기로 문제의식을 세웁니다.</p>
+          </div>
+          <div class="box">
+            <h3>실천형 프로젝트</h3>
+            <p>학교·지역에서 바로 실행 가능한 캠페인과 전시, 영상 제작.</p>
+          </div>
+          <div class="box">
+            <h3>멘토링 & 콘텐츠화</h3>
+            <p>전문 멘토의 피드백과 결과물의 디지털·오프라인 배포 지원.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <aside class="hero-illu fade-in" aria-hidden="true">
+        <div style="font-weight:800;color:var(--accent-2)">Youth Edition</div>
+        <div class="illu-card">
+          <!-- simple SVG illustration -->
+          <svg width="280" height="180" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="illustration">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#3b82f6"/>
+                <stop offset="1" stop-color="#07a3a3"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#g1)" opacity="0.12"/>
+            <g transform="translate(20,24)">
+              <rect x="0" y="40" width="220" height="70" rx="10" fill="#fff" opacity="0.9"/>
+              <circle cx="40" cy="30" r="24" fill="#07a3a3"/>
+              <path d="M120 6 C150 30, 160 50, 120 66" fill="none" stroke="#045d5d" stroke-width="3" stroke-linecap="round"/>
+              <rect x="12" y="52" width="70" height="10" rx="4" fill="#dff7f6"/>
+              <rect x="92" y="52" width="90" height="10" rx="4" fill="#e8f0ff"/>
+            </g>
+            <g transform="translate(14,116)">
+              <rect width="252" height="44" rx="8" fill="#ffffff" opacity="0.9"/>
+              <text x="20" y="28" font-size="12" fill="#0f172a" font-weight="700">프로젝트를 기획하고, 기록하고, 공유하세요.</text>
+            </g>
+          </svg>
+        </div>
+        <div style="display:flex;gap:8px;width:100%;justify-content:center;align-items:center">
+          <div class="chip">#나의지구일기</div>
+          <div class="chip">#학교로가는작은변화</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Steps -->
+    <section class="fade-in">
+      <div style="margin-top:20px;font-weight:800;font-size:18px">프로그램 한눈에 보기</div>
+      <div class="steps">
+        <div class="step">
+          <h4>1단계 · 감수성 워크숍</h4>
+          <p>시·수필쓰기, 환경윤리 토론, 지역 스토리 발굴 수업 (2주)</p>
+        </div>
+        <div class="step">
+          <h4>2단계 · 주제선정 & 설계</h4>
+          <p>팀과 주제를 정해 실천 가능한 프로젝트 계획 수립 (1주)</p>
+        </div>
+        <div class="step">
+          <h4>3단계 · 실행 & 기록</h4>
+          <p>현장 실행(캠페인, 전시, 영상 등) 및 기록물 제작 (6~8주)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply -->
+    <section class="apply fade-in" id="applySection" aria-labelledby="applyTitle">
+      <form id="applyForm" novalidate>
+        <h3 id="applyTitle">참가 신청서</h3>
+        <label for="name">이름</label>
+        <input id="name" name="name" type="text" placeholder="홍길동" required />
+
+        <div class="row" style="margin-top:6px">
+          <div class="small">
+            <label for="age">나이</label>
+            <input id="age" name="age" type="text" placeholder="16" required />
+          </div>
+          <div class="small">
+            <label for="school">학교/학년</label>
+            <input id="school" name="school" type="text" placeholder="OO중학교 2학년" required />
+          </div>
+        </div>
+
+        <label for="email">대표 이메일(또는 보호자 이메일)</label>
+        <input id="email" name="email" type="email" placeholder="example@email.com" required />
+
+        <label for="idea">하고 싶은 프로젝트 (한 줄)</label>
+        <input id="idea" name="idea" type="text" placeholder="학교 급식 쓰레기 줄이기 캠페인" maxlength="80" required />
+
+        <label for="pitch">프로젝트 간단 소개 (3~5문장)</label>
+        <textarea id="pitch" name="pitch" placeholder="예: 우리 학교 급식에서 플라스틱 포장을 줄이기 위해 ..." required></textarea>
+
+        <div class="btn-row">
+          <button type="submit" class="cta">신청하기</button>
+          <button type="button" class="secondary" id="saveDraft">초안 저장</button>
+          <div style="margin-left:auto" class="tiny muted">※ 개인정보는 신청 목적 외 사용하지 않습니다.</div>
+        </div>
+      </form>
+
+      <aside style="width:360px;min-width:300px">
+        <div style="background:linear-gradient(180deg,#ffffff,#f7fffd);padding:14px;border-radius:12px;box-shadow:0 8px 24px rgba(7,163,163,0.04)">
+          <div style="font-weight:800">지원 혜택</div>
+          <ul style="margin:10px 0 0;padding-left:18px;color:var(--muted)">
+            <li>프로젝트 실행비 소액 지원 (선정 팀)</li>
+            <li>전문 멘토링(문학·환경·미디어)</li>
+            <li>리터러시 페어 참가 및 결과물 배포</li>
+            <li>수료증(학교 제출용 활동증빙)</li>
+          </ul>
+        </div>
+
+        <div class="sponsors" style="margin-top:12px">
+          <div style="font-weight:800;margin-bottom:8px">후원 및 파트너</div>
+          <div class="s-logo" aria-hidden="true">
+            <div class="item">GREEN CO</div>
+            <div class="item">EDU PARTNER</div>
+            <div class="item">LOCAL GOV</div>
+            <div class="item">CULTURE FUND</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Stories -->
+    <section class="fade-in stories" aria-labelledby="storiesTitle">
+      <div style="font-weight:800;margin-top:18px" id="storiesTitle">참가자 스토리 & 아카이브</div>
+
+      <div id="storiesList">
+        <!-- stories populated by JS -->
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button class="secondary" id="loadSample">샘플 스토리 불러오기</button>
+        <div class="tiny muted" style="margin-left:auto">프로젝트는 사진·영상·텍스트 형태로 업로드 가능합니다.</div>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <div style="font-weight:800">지구 리터러시 청소년 펠로우십</div>
+        <div class="small">문의: hello@earthliteracy.kr · 주최: Earth Literacy Lab</div>
+      </div>
+      <div class="small">© 2025 Earth Literacy Lab — 청소년의 목소리로 지구를 기록합니다</div>
+    </footer>
+
+  </div>
+
+<script>
+/* FRONT-END LOGIC: form validation, local draft save, sample stories */
+(function(){
+  const form = document.getElementById('applyForm');
+  const saveDraft = document.getElementById('saveDraft');
+  const applyTopBtn = document.getElementById('applyTopBtn');
+  const scrollApply = document.getElementById('scrollApply');
+  const openGuide = document.getElementById('openGuide');
+  const storiesList = document.getElementById('storiesList');
+  const loadSample = document.getElementById('loadSample');
+
+  // Simple UI helpers
+  function toast(msg){
+    const t = document.createElement('div');
+    t.textContent = msg;
+    Object.assign(t.style,{
+      position:'fixed',right:'18px',bottom:'18px',background:'#063b3b',color:'#fff',padding:'10px 14px',borderRadius:'10px',zIndex:9999
+    });
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),3000);
+  }
+
+  // Scroll to form
+  applyTopBtn.addEventListener('click', ()=> document.getElementById('applySection').scrollIntoView({behavior:'smooth'}));
+  scrollApply.addEventListener('click', ()=> document.getElementById('applySection').scrollIntoView({behavior:'smooth'}));
+
+  // Guide modal (simple)
+  openGuide.addEventListener('click', ()=>{
+    const txt = `간단 가이드:
+1) 본인이 관심있는 환경문제(학교·지역)를 골라요.
+2) 왜 이 문제를 고쳤는지(인문적 질문)와 구체적 실천방법을 적어요.
+3) 사진/짧은 영상으로 기록하면 더 좋아요.`;
+    alert(txt);
+  });
+
+  // Save draft to localStorage
+  saveDraft.addEventListener('click', ()=>{
+    const data = {
+      name:form.name.value,
+      age:form.age.value,
+      school:form.school.value,
+      email:form.email.value,
+      idea:form.idea.value,
+      pitch:form.pitch.value,
+      savedAt: new Date().toISOString()
+    };
+    localStorage.setItem('el_youth_draft', JSON.stringify(data));
+    toast('초안이 로컬에 저장되었습니다. (브라우저를 닫아도 유지됩니다)');
+  });
+
+  // Load draft if exists
+  window.addEventListener('load', ()=>{
+    const d = localStorage.getItem('el_youth_draft');
+    if(d){
+      try{
+        const obj = JSON.parse(d);
+        if(obj && confirm('저장된 초안이 있습니다. 불러올까요?')){
+          form.name.value = obj.name || '';
+          form.age.value = obj.age || '';
+          form.school.value = obj.school || '';
+          form.email.value = obj.email || '';
+          form.idea.value = obj.idea || '';
+          form.pitch.value = obj.pitch || '';
+        }
+      }catch(e){}
+    }
+  });
+
+  // Form submission (fake)
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    // simple validation
+    if(!form.name.value.trim()){ alert('이름을 입력해주세요'); form.name.focus(); return; }
+    if(!form.age.value.trim()){ alert('나이를 입력해주세요'); form.age.focus(); return; }
+    if(!form.school.value.trim()){ alert('학교/학년을 입력해주세요'); form.school.focus(); return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value)){ alert('유효한 이메일을 입력해주세요'); form.email.focus(); return; }
+    if(!form.idea.value.trim()){ alert('프로젝트 아이디어를 한 줄로 작성해주세요'); form.idea.focus(); return; }
+    if(!form.pitch.value.trim()){ alert('프로젝트 소개를 작성해주세요'); form.pitch.focus(); return; }
+
+    // simulate "submission"
+    const entry = {
+      id: 'p_' + Date.now(),
+      name: form.name.value.trim(),
+      school: form.school.value.trim(),
+      idea: form.idea.value.trim(),
+      pitch: form.pitch.value.trim(),
+      date: new Date().toLocaleString()
+    };
+
+    // save to localStorage archive
+    const arr = JSON.parse(localStorage.getItem('el_youth_archive') || '[]');
+    arr.unshift(entry);
+    localStorage.setItem('el_youth_archive', JSON.stringify(arr));
+
+    // clear form
+    form.reset();
+    toast('신청이 접수되었습니다 — (샘플 앱이므로 실제 제출은 아닙니다)');
+    renderStories();
+    // scroll to stories
+    setTimeout(()=>document.getElementById('storiesTitle').scrollIntoView({behavior:'smooth'}),400);
+  });
+
+  // Stories render
+  function renderStories(){
+    const arr = JSON.parse(localStorage.getItem('el_youth_archive') || '[]');
+    storiesList.innerHTML = '';
+    if(arr.length === 0){
+      storiesList.innerHTML = '<div class="story-card"><div class="story-meta"><div class="avatar">YS</div><div><strong>샘플 스토리 없음</strong><div class="muted tiny">아직 등록된 참가작이 없습니다. 샘플 불러오기를 눌러 예시를 확인해보세요.</div></div></div></div>';
+      return;
+    }
+    arr.slice(0,10).forEach(item=>{
+      const card = document.createElement('div');
+      card.className = 'story-card';
+      card.innerHTML = `
+        <div class="story-meta">
+          <div class="avatar">${escapeInitials(item.name)}</div>
+          <div>
+            <strong>${escapeHtml(item.name)}</strong>
+            <div class="muted tiny">${escapeHtml(item.school)} · ${escapeHtml(item.date)}</div>
+          </div>
+        </div>
+        <div style="margin-top:10px"><strong>아이디어</strong><div style="margin-top:6px">${escapeHtml(item.idea)}</div></div>
+        <div style="margin-top:8px;color:var(--muted)"><strong>소개</strong><div style="margin-top:6px">${escapeHtml(item.pitch)}</div></div>
+      `;
+      storiesList.appendChild(card);
+    });
+  }
+
+  // sample data loader
+  loadSample.addEventListener('click', ()=>{
+    const samples = [
+      {name:'김하늘', school:'OO고등학교 2학년', idea:'급식 잔반 줄이기 캠페인', pitch:'급식 잔반을 줄이기 위해 매주 '+"\"플러스데이\""+'를 도입하여 소량 메뉴 체험과 남은 음식 기록 캠페인을 진행함.'},
+      {name:'이도윤', school:'OO중학교 3학년', idea:'플라스틱 빨대 대신 '+"'종이빨대 챌린지'", pitch:'카페와 협업하여 학교 주변 5개 상점에 종이빨대 비치 및 SNS 챌린지 실행.'},
+      {name:'박지민', school:'시립청소년센터', idea:'동네 나무 인터뷰 프로젝트', pitch:'지역 노인과 함께 마을 나무의 역사를 기록하고 전시하는 아카이브 제작.'}
+    ];
+    const arr = JSON.parse(localStorage.getItem('el_youth_archive') || '[]');
+    // prepend samples
+    const merged = samples.map((s,i)=>({id:'sample_'+i, name:s.name, school:s.school, idea:s.idea, pitch:s.pitch, date:new Date().toLocaleDateString()})).concat(arr);
+    localStorage.setItem('el_youth_archive', JSON.stringify(merged));
+    renderStories();
+    toast('샘플 스토리 3개가 추가되었습니다.');
+  });
+
+  // helpers
+  function escapeHtml(str){
+    if(!str) return '';
+    return String(str).replace(/[&<>"']/g, function(m){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])});
+  }
+  function escapeInitials(name){
+    if(!name) return 'YS';
+    const parts = name.trim().split(/\s+/);
+    if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
+    return (parts[0][0]+parts[1][0]).toUpperCase();
+  }
+
+  // initial render
+  renderStories();
+
+})();
+</script>
+</body>
+</html>
